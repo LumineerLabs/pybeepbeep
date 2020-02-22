@@ -82,7 +82,7 @@ def test_calc_distances_no_k():
     distances = calculate_distances(deltas=d,
                                     sampling_freq_hz=44100)
 
-    expected_distances = np.array([[    0, d_300, d_500, d_800],
+    expected_distances = np.array([[    0, d_300, d_500, d_800],  # noqa: E201
                                    [d_300,     0, d_300, d_500],
                                    [d_500, d_300,     0, d_800],
                                    [d_800, d_500, d_800,     0]])
@@ -136,7 +136,7 @@ def test_calc_distances_with_ks():
     d33 = 2 * d_3_3 * f
     d34 = f * (800 + d_3_3 + d_4_4)
 
-    d44 = 2 * d_4_4 *f
+    d44 = 2 * d_4_4 * f
 
     expected_distances = np.array([[d11, d12, d13, d14],
                                    [d12, d22, d23, d24],
@@ -193,7 +193,7 @@ def test_calc_distances_with_c():
     d33 = 2 * d_3_3 * f
     d34 = f * (800 + d_3_3 + d_4_4)
 
-    d44 = 2 * d_4_4 *f
+    d44 = 2 * d_4_4 * f
 
     expected_distances = np.array([[d11, d12, d13, d14],
                                    [d12, d22, d23, d24],

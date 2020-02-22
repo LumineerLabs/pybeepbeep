@@ -1,3 +1,5 @@
+from typing import List, Dict
+
 import numpy as np
 
 from librosa.core import time_to_samples, samples_to_time
@@ -13,10 +15,13 @@ onset_accuracy_threshold = .2
 delta_accuracy_threshold = time_to_samples(.01/343)
 
 
-def create_clip(tones: [{}]=[],
-                duration_s: float=5.0,
-                sampling_rate_hz: float=44100.0,
-                background_freq_hz: float=None) -> np.ndarray:
+def create_clip(tones: List[Dict] = None,
+                duration_s: float = 5.0,
+                sampling_rate_hz: float = 44100.0,
+                background_freq_hz: float = None) -> np.ndarray:
+    if tones is None:
+        tones = []
+
     n_samples = time_to_samples(duration_s, sr=44100)
     signal = np.zeros(n_samples)
     if background_freq_hz is not None:
@@ -214,4 +219,9 @@ def test_find_deltas_multi_tone():
 
     deltas = find_deltas(samples=clip, sampling_freq_hz=f_sampling, schedule=schedule, self_id='1')
 
-    assert np.array_equal(deltas, [0, time_to_samples(window/1000, sr=f_sampling), 0, time_to_samples(window/1000, sr=f_sampling)])
+    assert np.array_equal(
+        deltas,
+        [
+            0, time_to_samples(window/1000, sr=f_sampling), 0, time_to_samples(window/1000, sr=f_sampling)
+        ]
+    )

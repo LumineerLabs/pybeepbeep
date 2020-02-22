@@ -208,7 +208,6 @@ def test_generate_schedule_defaults():
     assert generated_schedule == expected_schedule
 
 
-
 def test_generate_schedule_band_scheduler_multiple_channel_multiple_nodes():
     nodes = ['1', '2', '3']
     target_hz = [1000.0, 2000.0, 3000.0]

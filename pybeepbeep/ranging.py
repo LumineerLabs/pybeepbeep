@@ -4,9 +4,8 @@ import numpy as np
 
 from typing import Callable, List, Dict
 
-from scipy.signal import correlate, hilbert, find_peaks_cwt, find_peaks
+from scipy.signal import correlate, hilbert find_peaks
 from librosa.core import tone, time_to_samples
-from librosa.onset import onset_detect
 
 
 # set fft window size
