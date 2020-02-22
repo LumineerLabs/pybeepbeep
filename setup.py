@@ -9,8 +9,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='pybeepbeep',
-    # version_format='{tag}',
-    version="0.0.0",
+    version_format='{tag}',
     author="Lane Haury",
     author_email="lane@lumineerlabs.com",
     description="pybeepbeep is a python implementation of the BeepBeep cooperative ranging algorithm.",
