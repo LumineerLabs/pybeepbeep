@@ -83,9 +83,9 @@ def test_calc_distances_no_k():
                                     sampling_freq_hz=44100)
 
     expected_distances = np.array([[    0, d_300, d_500, d_800],  # noqa: E201
-                                   [d_300,     0, d_300, d_500],
-                                   [d_500, d_300,     0, d_800],
-                                   [d_800, d_500, d_800,     0]])
+                                   [d_300,     0, d_300, d_500],  # noqa: E241
+                                   [d_500, d_300,     0, d_800],  # noqa: E241
+                                   [d_800, d_500, d_800,     0]])  # noqa: E241
 
     assert np.array_equal(distances, expected_distances)
 

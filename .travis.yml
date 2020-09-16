@@ -17,7 +17,9 @@ script: pytest
 jobs:
   include:
   - stage: lint
-    script: flake8 --max-line-length 120
+    script: flake8 --max-line-length 120 cirum_walabot
+  - stage: lint
+    script: flake8 --max-line-length 120 --ignore=S101 tests
   - stage: deploy
     script: skip
     deploy:

@@ -1,18 +1,18 @@
-from typing import List, Dict
+from typing import Dict, List
+
+from librosa.core import samples_to_time, time_to_samples
+from librosa.core import tone as create_tone
 
 import numpy as np
 
-from librosa.core import time_to_samples, samples_to_time
-from librosa.core import tone as create_tone
+from pybeepbeep.ranging import _calculate_windows_for_schedule, _find_beep_in_window, _get_window_size_ms, \
+    band_scheduler, find_deltas, generate_schedule
 
 from scipy.signal.windows import hamming
 
-from pybeepbeep.ranging import _find_beep_in_window, band_scheduler, generate_schedule, find_deltas, \
-                               _calculate_windows_for_schedule, _get_window_size_ms
-
 
 onset_accuracy_threshold = .2
-delta_accuracy_threshold = time_to_samples(.01/343)
+delta_accuracy_threshold = time_to_samples(.01 / 343)
 
 
 def create_clip(tones: List[Dict] = None,
@@ -184,8 +184,8 @@ def test_find_deltas_two_nodes():
 
     schedule = generate_schedule(nodes=nodes,
                                  scheduler_kwargs={
-                                    "target_hz": target_hz,
-                                    "duration_ms": duration_ms
+                                     "target_hz": target_hz,
+                                     "duration_ms": duration_ms
                                  })
 
     tones = [{"freq_hz": entry["target_hz"], "duration_s": entry["duration_ms"] / 1000.0, "start_s": entry["time_s"]}
@@ -195,7 +195,7 @@ def test_find_deltas_two_nodes():
 
     deltas = find_deltas(samples=clip, sampling_freq_hz=f_sampling, schedule=schedule, self_id='1')
 
-    assert np.array_equal(deltas, [0, time_to_samples(window/1000, sr=f_sampling)])
+    assert np.array_equal(deltas, [0, time_to_samples(window / 1000, sr=f_sampling)])
 
 
 def test_find_deltas_multi_tone():
@@ -208,8 +208,8 @@ def test_find_deltas_multi_tone():
     schedule = generate_schedule(nodes=nodes,
                                  schedule_strategy=band_scheduler,
                                  scheduler_kwargs={
-                                    "channels": target_hz,
-                                    "duration_ms": duration_ms
+                                     "channels": target_hz,
+                                     "duration_ms": duration_ms
                                  })
 
     tones = [{"freq_hz": entry["target_hz"], "duration_s": entry["duration_ms"] / 1000.0, "start_s": entry["time_s"]}
@@ -222,6 +222,6 @@ def test_find_deltas_multi_tone():
     assert np.array_equal(
         deltas,
         [
-            0, time_to_samples(window/1000, sr=f_sampling), 0, time_to_samples(window/1000, sr=f_sampling)
+            0, time_to_samples(window / 1000, sr=f_sampling), 0, time_to_samples(window / 1000, sr=f_sampling)
         ]
     )

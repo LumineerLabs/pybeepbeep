@@ -1,4 +1,4 @@
-from pybeepbeep.ranging import single_tone_scheduler, band_scheduler, generate_schedule
+from pybeepbeep.ranging import band_scheduler, generate_schedule, single_tone_scheduler
 
 
 def test_single_tone_scheduler_single_node():
